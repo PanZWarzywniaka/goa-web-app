@@ -11,8 +11,8 @@
 
 	onMount(() => {
 		let svg_element = document.getElementsByTagName('svg')[0]
-		svg_element.removeAttribute('width')
-		svg_element.removeAttribute('height')
+		// svg_element.removeAttribute('width')
+		// svg_element.removeAttribute('height')
 
 		let bg = document.getElementById('land')
 
