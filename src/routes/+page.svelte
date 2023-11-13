@@ -1,52 +1,9 @@
 <script>
-	// @ts-nocheck
-
-	import { onMount } from 'svelte'
-	import ColorPicker from 'svelte-awesome-color-picker'
-
-	export let data
-
-	// @ts-ignore
-	let hex = '#f2ff00'
-
-	onMount(() => {
-		let svg_element = document.getElementsByTagName('svg')[0]
-		// svg_element.removeAttribute('width')
-		// svg_element.removeAttribute('height')
-
-		let bg = document.getElementById('land')
-
-		// hex = bg.attributes.fill()
-		console.log(hex)
-
-		hex = bg.attributes.fill.value
-	})
-
-	function handleColourChange(ev) {
-		document.getElementById('land').attributes.fill.value = hex
-	}
+	let location = 'New York'
 </script>
 
-<div class="container">
-	<div class="row">
-		<div class="col-8">
-			<h1>GOA Web</h1>
-
-			<div id="map-div" class="container">
-				{@html data.svg_string}
-			</div>
-		</div>
-		<div class="col">
-			<ColorPicker
-				on:input={handleColourChange}
-				bind:hex
-				label="Land"
-				isAlpha={false}
-				canChangeMode={false}
-			/>
-		</div>
-	</div>
+<div class="col-lg-6 col-md-8 mx-auto">
+	<h1>Hello</h1>
+	<input bind:value={location} />
+	<a class="btn" href="/map/{location}">Click here to generate {location}</a>
 </div>
-
-<style>
-</style>

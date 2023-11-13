@@ -1,10 +1,9 @@
 
+import type { PageServerLoad } from './$types';
 
-export const load = async ({ fetch }) => {
-    // const res = await fetch('api/maps')
-    // const item = await res.json()
-    // const res = await fetch('warsaw_emerald_a3.svg')
+export const load = async ({ fetch, params }) => {
 
+    console.log(`Fetching map ${params.location}`)
     const res = await fetch('http://0.0.0.0:8000/v1/map')
 
     // const item = await res.text()
