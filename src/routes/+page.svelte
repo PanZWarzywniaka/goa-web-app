@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { debounce } from '$lib'
+
 	let foundSuggestions: string[] = []
 
 	const searchLocations = async (event: KeyboardEvent) => {
@@ -16,15 +18,6 @@
 		foundSuggestions = response.map((el) => {
 			return el.display_name
 		})
-	}
-
-	const debounce = (callback: Function, wait = 300) => {
-		let timeout: ReturnType<typeof setTimeout>
-
-		return (...args: any[]) => {
-			clearTimeout(timeout)
-			timeout = setTimeout(() => callback(...args), wait)
-		}
 	}
 
 	$: console.log(foundSuggestions)
