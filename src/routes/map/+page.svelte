@@ -27,7 +27,7 @@
 </script>
 
 <div class="col-8">
-	<h1>GOA Web</h1>
+	<h1><a href="/">GOA Web</a></h1>
 
 	<div id="map-div" class="container">
 		{@html data.svg_string}

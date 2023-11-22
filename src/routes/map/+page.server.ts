@@ -3,10 +3,12 @@ import type { PageServerLoad } from './$types';
 
 export const load = async ({ fetch, params, url }) => {
 
-    url.searchParams
-    console.log(`Fetching map ${params.location}`)
+    console.log(`Search params are ${url.searchParams}`)
 
-    const coordinates = [-3.761955, 40.366123, -3.653073, 40.465302]
+
+    const p = url.searchParams
+    //min x min y max x max y
+    const coordinates = [p.get("min_lon"), p.get("min_lat"), p.get("max_lon"), p.get("max_lat")]
     const api_url = new URL(`http://0.0.0.0:8000/v1/map`)
 
     const headers = {
