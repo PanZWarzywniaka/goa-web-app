@@ -16,17 +16,20 @@
 
 		console.log(response)
 		foundSuggestions = response
-		// .filter((el) => el.addresstype == 'city')
-		// .map((el) => {
-		// 	return el.display_name
-		// })
+			.filter((el) => el.addresstype == 'city')
+			.map((el) => {
+				let [min_lat, max_lat, min_lon, max_lon] = el.boundingbox
+				el.link = `/map?min_lat=${min_lat}&max_lat=${max_lat}&min_lon=${min_lon}&max_lon=${max_lon}`
+
+				return el
+			})
 	}
 
 	$: console.log(foundSuggestions)
 </script>
 
 <div class="col-lg-6 col-md-8 mx-auto">
-	<h1>Hello</h1>
+	<h1><a href="/">Hello</a></h1>
 	<form>
 		<input
 			name="search"
@@ -39,7 +42,7 @@
 			<ul>
 				{#each foundSuggestions as suggestion}
 					<li class="flex px-4 py-2 border border-gray-200 bg-gray-50 hover:bg-gray-200">
-						{suggestion.display_name}
+						<a href={suggestion.link}>{suggestion.display_name}</a>
 					</li>
 				{/each}
 			</ul>
