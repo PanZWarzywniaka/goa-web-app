@@ -15,9 +15,11 @@
 		const response = await (await fetch(url)).json()
 
 		console.log(response)
-		foundSuggestions = response.map((el) => {
-			return el.display_name
-		})
+		foundSuggestions = response
+		// .filter((el) => el.addresstype == 'city')
+		// .map((el) => {
+		// 	return el.display_name
+		// })
 	}
 
 	$: console.log(foundSuggestions)
@@ -37,7 +39,7 @@
 			<ul>
 				{#each foundSuggestions as suggestion}
 					<li class="flex px-4 py-2 border border-gray-200 bg-gray-50 hover:bg-gray-200">
-						{suggestion}
+						{suggestion.display_name}
 					</li>
 				{/each}
 			</ul>
