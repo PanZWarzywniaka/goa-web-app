@@ -8,7 +8,14 @@ export const load = async ({ fetch, params, url }) => {
 
     const p = url.searchParams
     //min x min y max x max y
-    const coordinates = [p.get("min_lon"), p.get("min_lat"), p.get("max_lon"), p.get("max_lat")]
+    // const coordinates = [p.get("min_lon"), p.get("min_lat"), p.get("max_lon"), p.get("max_lat")]
+
+    const area = {
+        "latlon": [
+            p.get("lat"),
+            p.get("lon")
+        ]
+    }
     const api_url = new URL(`http://0.0.0.0:8000/v1/map`)
 
     const headers = {
@@ -18,7 +25,7 @@ export const load = async ({ fetch, params, url }) => {
     const requestOptions = {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(coordinates)
+        body: JSON.stringify(area)
     };
 
     const res = await fetch(api_url, requestOptions)

@@ -18,8 +18,9 @@
 		foundSuggestions = response
 			.filter((el) => el.addresstype == 'city')
 			.map((el) => {
-				let [min_lat, max_lat, min_lon, max_lon] = el.boundingbox
-				el.link = `/map?min_lat=${min_lat}&max_lat=${max_lat}&min_lon=${min_lon}&max_lon=${max_lon}`
+				// let [min_lat, max_lat, min_lon, max_lon] = el.boundingbox
+				// el.url = `/map?min_lat=${min_lat}&max_lat=${max_lat}&min_lon=${min_lon}&max_lon=${max_lon}`
+				el.url = `/map?lat=${el.lat}&lon=${el.lon}`
 
 				return el
 			})
@@ -42,7 +43,7 @@
 			<ul>
 				{#each foundSuggestions as suggestion}
 					<li class="flex px-4 py-2 border border-gray-200 bg-gray-50 hover:bg-gray-200">
-						<a href={suggestion.link}>{suggestion.display_name}</a>
+						<a href={suggestion.url}>{suggestion.display_name}</a>
 					</li>
 				{/each}
 			</ul>
