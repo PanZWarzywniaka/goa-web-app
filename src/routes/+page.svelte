@@ -16,7 +16,7 @@
 
 		console.log(response)
 		foundSuggestions = response
-			.filter((el) => el.addresstype == 'city')
+			// .filter((el) => el.addresstype == 'city')
 			.map((el) => {
 				// let [min_lat, max_lat, min_lon, max_lon] = el.boundingbox
 				// el.url = `/map?min_lat=${min_lat}&max_lat=${max_lat}&min_lon=${min_lon}&max_lon=${max_lon}`
