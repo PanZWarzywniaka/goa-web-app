@@ -16,7 +16,7 @@ export const load = async ({ fetch, params, url }) => {
             p.get("lon")
         ]
     }
-    const api_url = new URL(`http://0.0.0.0:8000/v1/map`)
+    const api_url = new URL(`https://goa.olek.site/v1/map`)
 
     const headers = {
         'Accept': 'application/json',
