@@ -9,9 +9,7 @@
 	let hex = '#f2ff00'
 
 	onMount(() => {
-		let svg_element = document.getElementsByTagName('svg')[0]
-		// svg_element.removeAttribute('width')
-		// svg_element.removeAttribute('height')
+		let groups = document.getElementsByTagName('g')
 
 		let bg = document.getElementById('land')
 
@@ -33,6 +31,7 @@
 		{@html data.svg_string}
 	</div>
 </div>
+
 <div class="col">
 	<ColorPicker
 		on:input={handleColourChange}
