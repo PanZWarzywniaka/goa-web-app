@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { Circle } from 'svelte-loading-spinners'
 	import { debounce } from '$lib'
 
 	let foundSuggestions: string[] = []
+	let waiting: boolean = false
 
 	const searchLocations = async (event: KeyboardEvent) => {
 		const input = event.target as HTMLInputElement
@@ -38,12 +40,25 @@
 			placeholder="Search location"
 			on:keyup={debounce(searchLocations)}
 		/>
-
-		{#if foundSuggestions.length > 0}
+		{#if waiting}
+			<p class="fs-2">Your map is loading... &#129303;</p>
+			<Circle />
+		{/if}
+		{#if foundSuggestions.length > 0 && !waiting}
 			<ul>
 				{#each foundSuggestions as suggestion}
-					<li class="flex px-4 py-2 border border-gray-200 bg-gray-50 hover:bg-gray-200">
-						<a href={suggestion.url}>{suggestion.display_name}</a>
+					<li
+						class="flex px-4 py-2 border border-gray-200 bg-gray-50 hover:bg-gray-200"
+						data-sveltekit-preload-data="false"
+					>
+						<a
+							on:click={() => {
+								waiting = true
+							}}
+							href={suggestion.url}
+						>
+							{suggestion.display_name}
+						</a>
 					</li>
 				{/each}
 			</ul>
