@@ -32,7 +32,8 @@
 </script>
 
 <div class="col-lg-6 col-md-8 mx-auto">
-	<h1><a href="/">Hello</a></h1>
+	<h1><a href="/">GOA Web</a></h1>
+	<p>Start by typing a place below</p>
 	<form>
 		<input
 			name="search"
