@@ -39,7 +39,7 @@
 			name="search"
 			type="search"
 			placeholder="Search location"
-			on:keyup={debounce(searchLocations)}
+			on:input={debounce(searchLocations)}
 		/>
 		{#if waiting}
 			<p class="fs-2">Your map is loading... &#129303;</p>
