@@ -6,11 +6,7 @@ export const load: PageServerLoad = async ({ fetch, params, url }) => {
 
     console.log(`Search params are ${url.searchParams}`)
 
-
     const p = url.searchParams
-    //min x min y max x max y
-    // const coordinates = [p.get("min_lon"), p.get("min_lat"), p.get("max_lon"), p.get("max_lat")]
-
     const area = {
         "latlon": [
             p.get("lat"),
