@@ -18,7 +18,7 @@
 
 		console.log(response)
 		foundSuggestions = response
-			// .filter((el) => el.addresstype == 'city')
+			.filter((el) => el.addresstype != 'administrative')
 			.map((el) => {
 				el.url = `/map?lat=${el.lat}&lon=${el.lon}`
 				return el
@@ -47,7 +47,7 @@
 				{#each foundSuggestions as suggestion}
 					<li
 						class="flex px-4 py-2 border border-gray-200 bg-gray-50 hover:bg-gray-200"
-						data-sveltekit-preload-data="false"
+						data-sveltekit-preload-data="off"
 					>
 						<a
 							on:click={() => {
@@ -56,6 +56,7 @@
 							href={suggestion.url}
 						>
 							{suggestion.display_name}
+							({suggestion.addresstype})
 						</a>
 					</li>
 				{/each}
