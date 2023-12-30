@@ -1,27 +1,24 @@
 <script>
-	// @ts-nocheck
-
 	import { onMount } from 'svelte'
 	import ColorPicker from 'svelte-awesome-color-picker'
 
+	// @ts-ignore
 	export let data
 
-	let hex = '#f2ff00'
+	let land_hex = '#ffffff'
+	let isMounted = false
+
+	$: if (isMounted) {
+		console.log(`Switching colour to ${land_hex}`)
+		// @ts-ignore
+		document.getElementById('land').attributes.fill.value = land_hex
+	}
 
 	onMount(() => {
-		let groups = document.getElementsByTagName('g')
-
 		let bg = document.getElementById('land')
-
-		// hex = bg.attributes.fill()
-		console.log(hex)
-
-		hex = bg.attributes.fill.value
+		land_hex = bg.attributes.fill.value
+		isMounted = true
 	})
-
-	function handleColourChange(ev) {
-		document.getElementById('land').attributes.fill.value = hex
-	}
 </script>
 
 <div class="col-8">
@@ -33,13 +30,7 @@
 </div>
 
 <div class="col">
-	<ColorPicker
-		on:input={handleColourChange}
-		bind:hex
-		label="Land"
-		isAlpha={false}
-		canChangeMode={false}
-	/>
+	<ColorPicker bind:hex={land_hex} label="Land cover" isAlpha={false} canChangeMode={false} />
 </div>
 
 <style>
