@@ -3,7 +3,7 @@
 	import { debounce } from '$lib'
 
 	let foundSuggestions: string[] = []
-	let waiting: boolean = false
+	let map_loading: boolean = false
 
 	const searchLocations = async (event: KeyboardEvent) => {
 		const input = event.target as HTMLInputElement
@@ -38,11 +38,11 @@
 			placeholder="Search location"
 			on:input={debounce(searchLocations)}
 		/>
-		{#if waiting}
+		{#if map_loading}
 			<p class="fs-2">Your map is loading... &#129303;</p>
 			<Circle />
 		{/if}
-		{#if foundSuggestions.length > 0 && !waiting}
+		{#if foundSuggestions.length > 0 && !map_loading}
 			<ul>
 				{#each foundSuggestions as suggestion}
 					<li
@@ -51,7 +51,7 @@
 					>
 						<a
 							on:click={() => {
-								waiting = true
+								map_loading = true
 							}}
 							href={suggestion.url}
 						>
