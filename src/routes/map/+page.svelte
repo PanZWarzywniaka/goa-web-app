@@ -49,19 +49,21 @@
 	{#if isMounted}
 		<div id="pickers">
 			{#each Object.entries(colours) as [name, _]}
-				<ColorPicker
-					bind:hex={colours[name].value}
-					label={colours[name].label}
-					isAlpha={false}
-					canChangeMode={false}
-				/>
+				<div class="picker">
+					<ColorPicker
+						bind:hex={colours[name].value}
+						label={colours[name].label}
+						isAlpha={false}
+						canChangeMode={false}
+					/>
+				</div>
 			{/each}
 		</div>
 	{/if}
 </div>
 
 <style>
-	#pickers > div {
+	.picker {
 		border: 1px solid #ddd; /* Light gray border */
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
 	}
