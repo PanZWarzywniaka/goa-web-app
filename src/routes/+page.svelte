@@ -5,10 +5,17 @@
 	let foundSuggestions: string[] = []
 	let map_loading: boolean = false
 
-	const searchLocations = async (event: KeyboardEvent) => {
-		const input = event.target as HTMLInputElement
-		const query = input.value
+	let query = ''
 
+	$: need_spell_check = query.length > 0 && foundSuggestions.length === 0 && !loading_locations
+	let loading_locations = false
+
+	const searchLocations = async (event: KeyboardEvent) => {
+		loading_locations = true
+
+		//debounce (get locations)
+
+		loading_locations = false
 		if (!query || query.length === 0) {
 			foundSuggestions = []
 			return
@@ -36,13 +43,15 @@
 			name="search"
 			type="search"
 			placeholder="Search location"
+			bind:value={query}
 			on:input={debounce(searchLocations)}
 		/>
 		{#if map_loading}
 			<p class="fs-2">Your map is loading... &#129303;</p>
 			<Circle />
-		{/if}
-		{#if foundSuggestions.length > 0 && !map_loading}
+		{:else if need_spell_check}
+			<p class="fs-2">No results... please check spelling and type again</p>
+		{:else if foundSuggestions.length > 0}
 			<ul>
 				{#each foundSuggestions as suggestion}
 					<li
