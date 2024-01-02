@@ -37,9 +37,9 @@
 
 <div class="col-8">
 	<h1><a href="/">GOA Web</a></h1>
-
+	<h2>Here is ur poster of {data.display_name}</h2>
 	<div id="map-div" class="container">
-		{@html data.svg_string}
+		{@html data.svg_string.svg_string}
 	</div>
 </div>
 

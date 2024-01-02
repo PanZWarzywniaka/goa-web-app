@@ -12,15 +12,12 @@ function getAPIEndpoint(): URL {
     return api_url
 }
 
-export const load: PageServerLoad = async ({ fetch, params, url }) => {
+async function getMap(lat: string, lon: string): Promise<{ "svg_string": string }> {
 
-    console.log(`Search params are ${url.searchParams}`)
-
-    const p = url.searchParams
     const area = {
         "latlon": [
-            p.get("lat"),
-            p.get("lon")
+            lat,
+            lon
         ]
     }
 
@@ -28,14 +25,36 @@ export const load: PageServerLoad = async ({ fetch, params, url }) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
+
     const requestOptions = {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(area)
     };
 
-    const res = await fetch(getAPIEndpoint(), requestOptions)
-    const item = await res.json()
+    return fetch(getAPIEndpoint(), requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data (HTTP status ${response.status})`);
+            }
+            return response.json();
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        });
 
-    return item
+}
+
+export const load: PageServerLoad = async ({ fetch, params, url }) => {
+
+    console.log(`Search params are ${url.searchParams}`)
+
+    const p = url.searchParams
+
+
+
+    return {
+        "svg_string": getMap(p.get("lat"), p.get("lon")),
+        "display_name": p.get("display_name")
+    }
 }
