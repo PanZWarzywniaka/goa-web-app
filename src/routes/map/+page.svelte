@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte'
 	import ColorPicker from 'svelte-awesome-color-picker'
+	// import ColorPicker from './ColorPicker.svelte'
 
 	// @ts-ignore
 	export let data
@@ -8,20 +9,19 @@
 	let land_hex = '#ffffff'
 
 	let colours = {
-		land: '#ffffff',
-		water: '#aaaaff',
-		green: '#00ff00',
-		bg: '#f3f3f3'
+		land: { value: '#ffffff', label: 'Land cover' },
+		water: { value: '#aaaaff', label: 'Water cover' },
+		green: { value: '#00ff00', label: 'Greenery' },
+		bg: { value: '#f3f3f3', label: 'Frame' }
 	}
 
 	let isMounted = false
 
 	//initialize
 	onMount(() => {
-		colours.land = document.getElementById('land')?.attributes.fill.value
-		colours.water = document.getElementById('water')?.attributes.fill.value
-		colours.green = document.getElementById('green')?.attributes.fill.value
-		colours.bg = document.getElementById('bg')?.attributes.fill.value
+		for (const layer_name in colours) {
+			colours[layer_name].value = document.getElementById(layer_name)?.attributes.fill.value
+		}
 
 		console.log(`Colours initialized to: \n ${JSON.stringify(colours)}`)
 		isMounted = true
@@ -31,10 +31,9 @@
 	$: if (isMounted) {
 		console.log(`Switching colours to: \n ${JSON.stringify(colours)}`)
 
-		document.getElementById('land').attributes.fill.value = colours.land
-		document.getElementById('water').attributes.fill.value = colours.water
-		document.getElementById('green').attributes.fill.value = colours.green
-		document.getElementById('bg').attributes.fill.value = colours.bg
+		for (const layer_name in colours) {
+			document.getElementById(layer_name).attributes.fill.value = colours[layer_name].value
+		}
 	}
 </script>
 
@@ -48,33 +47,21 @@
 
 <div class="col">
 	{#if isMounted}
-		<div class="picker">
-			<ColorPicker
-				bind:hex={colours.land}
-				label="Land cover"
-				isAlpha={false}
-				canChangeMode={false}
-			/>
-		</div>
-		<div class="picker">
-			<ColorPicker bind:hex={colours.water} label="Water" isAlpha={false} canChangeMode={false} />
-		</div>
-		<div class="picker">
-			<ColorPicker
-				bind:hex={colours.green}
-				label="Greenery"
-				isAlpha={false}
-				canChangeMode={false}
-			/>
-		</div>
-		<div class="picker">
-			<ColorPicker bind:hex={colours.bg} label="Frame" isAlpha={false} canChangeMode={false} />
+		<div id="pickers">
+			{#each Object.entries(colours) as [name, _]}
+				<ColorPicker
+					bind:hex={colours[name].value}
+					label={colours[name].label}
+					isAlpha={false}
+					canChangeMode={false}
+				/>
+			{/each}
 		</div>
 	{/if}
 </div>
 
 <style>
-	.picker {
+	#pickers > div {
 		border: 1px solid #ddd; /* Light gray border */
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
 	}
