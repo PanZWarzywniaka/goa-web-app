@@ -6,8 +6,6 @@
 	// @ts-ignore
 	export let data
 
-	let land_hex = '#ffffff'
-
 	let colours = {
 		land: { value: '#ffffff', label: 'Land cover' },
 		water: { value: '#aaaaff', label: 'Water cover' },
