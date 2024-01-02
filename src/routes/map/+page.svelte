@@ -10,7 +10,8 @@
 	let colours = {
 		land: '#ffffff',
 		water: '#aaaaff',
-		green: '#00ff00'
+		green: '#00ff00',
+		bg: '#f3f3f3'
 	}
 
 	let isMounted = false
@@ -20,6 +21,7 @@
 		colours.land = document.getElementById('land')?.attributes.fill.value
 		colours.water = document.getElementById('water')?.attributes.fill.value
 		colours.green = document.getElementById('green')?.attributes.fill.value
+		colours.bg = document.getElementById('bg')?.attributes.fill.value
 
 		console.log(`Colours initialized to: \n ${JSON.stringify(colours)}`)
 		isMounted = true
@@ -32,6 +34,7 @@
 		document.getElementById('land').attributes.fill.value = colours.land
 		document.getElementById('water').attributes.fill.value = colours.water
 		document.getElementById('green').attributes.fill.value = colours.green
+		document.getElementById('bg').attributes.fill.value = colours.bg
 	}
 </script>
 
@@ -44,10 +47,35 @@
 </div>
 
 <div class="col">
-	<ColorPicker bind:hex={colours.land} label="Land cover" isAlpha={false} canChangeMode={false} />
-	<ColorPicker bind:hex={colours.water} label="Water" isAlpha={false} canChangeMode={false} />
-	<ColorPicker bind:hex={colours.green} label="Greenery" isAlpha={false} canChangeMode={false} />
+	{#if isMounted}
+		<div class="picker">
+			<ColorPicker
+				bind:hex={colours.land}
+				label="Land cover"
+				isAlpha={false}
+				canChangeMode={false}
+			/>
+		</div>
+		<div class="picker">
+			<ColorPicker bind:hex={colours.water} label="Water" isAlpha={false} canChangeMode={false} />
+		</div>
+		<div class="picker">
+			<ColorPicker
+				bind:hex={colours.green}
+				label="Greenery"
+				isAlpha={false}
+				canChangeMode={false}
+			/>
+		</div>
+		<div class="picker">
+			<ColorPicker bind:hex={colours.bg} label="Frame" isAlpha={false} canChangeMode={false} />
+		</div>
+	{/if}
 </div>
 
 <style>
+	.picker {
+		border: 1px solid #ddd; /* Light gray border */
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+	}
 </style>
