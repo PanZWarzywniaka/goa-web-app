@@ -6,16 +6,9 @@
 	let map_loading: boolean = false
 
 	let query = ''
-
-	$: need_spell_check = query.length > 0 && foundSuggestions.length === 0 && !loading_locations
-	let loading_locations = false
+	let need_spell_check = false
 
 	const searchLocations = async (event: KeyboardEvent) => {
-		loading_locations = true
-
-		//debounce (get locations)
-
-		loading_locations = false
 		if (!query || query.length === 0) {
 			foundSuggestions = []
 			return
@@ -30,6 +23,8 @@
 				el.url = `/map?lat=${el.lat}&lon=${el.lon}`
 				return el
 			})
+
+		need_spell_check = foundSuggestions.length == 0
 	}
 
 	$: console.log(foundSuggestions)
