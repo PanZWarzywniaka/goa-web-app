@@ -1,29 +1,16 @@
 <script lang="ts">
 	import { Circle } from 'svelte-loading-spinners'
-	import { debounce } from '$lib'
+	import { debounce } from '$lib/index'
+	import { getLocations, type OSMNominatimPlace } from '$lib/osm_nominatim'
 
-	let foundSuggestions: string[] = []
+	let foundSuggestions: OSMNominatimPlace[] = []
 	let map_loading: boolean = false
 
-	let query = ''
-	let need_spell_check = false
+	let query: string = ''
+	let need_spell_check: boolean = false
 
 	const searchLocations = async (event: KeyboardEvent) => {
-		if (!query || query.length === 0) {
-			foundSuggestions = []
-			return
-		}
-		const url = `https://nominatim.openstreetmap.org/search?q=${query}&limit=10&format=json`
-		const response = await (await fetch(url)).json()
-
-		console.log(response)
-		foundSuggestions = response
-			.filter((el) => el.addresstype != 'administrative')
-			.map((el) => {
-				el.url = `/map?lat=${el.lat}&lon=${el.lon}`
-				return el
-			})
-
+		foundSuggestions = await getLocations(query)
 		need_spell_check = foundSuggestions.length == 0
 	}
 
