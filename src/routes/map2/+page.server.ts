@@ -13,6 +13,6 @@ export const load: PageServerLoad = async ({ fetch, params, url }) => {
 
     return {
 
-        "display_name": p.get("display_name")
+        "display_name": "Hard coded Kraków"//p.get("display_name")
     }
 }
