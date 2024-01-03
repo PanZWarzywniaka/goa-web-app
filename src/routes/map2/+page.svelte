@@ -1,8 +1,9 @@
 <script>
-	import { onMount } from 'svelte'
-	import ColorPicker from 'svelte-awesome-color-picker'
+	import Map from './Map.svelte'
 
 	export let data
+
+	let text = 'world'
 </script>
 
 <div class="row">
@@ -14,9 +15,14 @@
 <div class="row">
 	<div class="col-md">
 		<h2>Here is ur poster of {data.display_name}</h2>
-		Map place holder
+		<Map {...data.map_data} land_fill={text} />
 	</div>
-	<div class="col-sm">Color pickers..</div>
+
+	<div class="col-sm">
+		<input bind:value={text} />
+		Color pickers..
+		<h1>Hello {text}!</h1>
+	</div>
 </div>
 
 <style>
