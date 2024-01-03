@@ -2,11 +2,11 @@
 	const WIDTH = 4960
 	const HEIGHT = 7016
 
-	export let land_fill: string = '#338585'
+	export let land_fill: string
 	export let greenery: string
-	export let greenery_fill: string = '#266464'
+	export let greenery_fill: string
 	export let water: string
-	export let water_fill: string = '#f3f3f3'
+	export let water_fill: string
 </script>
 
 <svg viewBox="0 0 {WIDTH} {HEIGHT}">
