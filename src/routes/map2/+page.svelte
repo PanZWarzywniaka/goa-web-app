@@ -10,6 +10,8 @@
 		water_col: '#f3f3f3',
 		frame_col: '#f12267'
 	}
+
+	let frame_width: number = 100
 </script>
 
 <div class="row">
@@ -23,7 +25,7 @@
 		<h2>Here is ur poster of {data.display_name}</h2>
 
 		<!-- <Map {...data.map_data} {land_col} {greenery_col} {water_col} {frame_col} /> -->
-		<Map {...data.map_data} {...colours} />
+		<Map {...data.map_data} {...colours} {frame_width} />
 	</div>
 
 	<div class="col-sm">
@@ -41,6 +43,12 @@
 			canChangeMode={false}
 		/>
 		<ColorPicker bind:hex={colours.frame_col} label="Frame" isAlpha={false} canChangeMode={false} />
+
+		<label>
+			Frame width
+			<input type="number" bind:value={frame_width} min="0" max="1000" />
+			<input type="range" bind:value={frame_width} min="0" max="1000" />
+		</label>
 	</div>
 </div>
 

@@ -12,6 +12,8 @@
 	export let water_col: string
 	export let frame_col: string
 
+	export let frame_width: number
+
 	let svg_el: SVGElement
 	$: console.log(svg_el)
 </script>
@@ -29,12 +31,13 @@
 	</g>
 	<g id="frame">
 		<rect
+			id="main-frame"
 			x="0"
 			y="0"
 			width={WIDTH}
 			height={HEIGHT}
 			stroke={frame_col}
-			stroke-width="100"
+			stroke-width={frame_width}
 			fill="none"
 		/>
 	</g>
