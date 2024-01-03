@@ -7,9 +7,12 @@
 	export let greenery_fill: string
 	export let water: string
 	export let water_fill: string
+
+	let svg_el: SVGElement
+	$: console.log(svg_el)
 </script>
 
-<svg viewBox="0 0 {WIDTH} {HEIGHT}">
+<svg bind:this={svg_el} viewBox="0 0 {WIDTH} {HEIGHT}">
 	<g id="map">
 		<rect x="0" y="0" width={WIDTH} height={HEIGHT} id="land" fill={land_fill} />
 
