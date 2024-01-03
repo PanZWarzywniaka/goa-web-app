@@ -35,29 +35,31 @@
 	}
 </script>
 
-<div class="col-8">
-	<h1><a href="/">GOA Web</a></h1>
-	<h2>Here is ur poster of {data.display_name}</h2>
-	<div id="map-div" class="container">
-		{@html data.svg_string.svg_string}
-	</div>
-</div>
-
-<div class="col">
-	{#if isMounted}
-		<div id="pickers">
-			{#each Object.entries(colours) as [name, _]}
-				<div class="picker">
-					<ColorPicker
-						bind:hex={colours[name].value}
-						label={colours[name].label}
-						isAlpha={false}
-						canChangeMode={false}
-					/>
-				</div>
-			{/each}
+<div class="row">
+	<div class="col-8">
+		<h1><a href="/">GOA Web</a></h1>
+		<h2>Here is ur poster of {data.display_name}</h2>
+		<div id="map-div" class="container">
+			{@html data.svg_string.svg_string}
 		</div>
-	{/if}
+	</div>
+
+	<div class="col">
+		{#if isMounted}
+			<div id="pickers">
+				{#each Object.entries(colours) as [name, _]}
+					<div class="picker">
+						<ColorPicker
+							bind:hex={colours[name].value}
+							label={colours[name].label}
+							isAlpha={false}
+							canChangeMode={false}
+						/>
+					</div>
+				{/each}
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>
