@@ -32,16 +32,7 @@ async function getMap(lat: string, lon: string): Promise<{ "svg_string": string 
         body: JSON.stringify(area)
     };
 
-    return fetch(getAPIEndpoint(), requestOptions)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Failed to fetch data (HTTP status ${response.status})`);
-            }
-            return response.json();
-        })
-        .catch(error => {
-            return Promise.reject(error);
-        });
+    return fetch(getAPIEndpoint(), requestOptions).then(r => r.json())
 
 }
 
