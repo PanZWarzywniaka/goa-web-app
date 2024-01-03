@@ -12,7 +12,7 @@ function getAPIEndpoint(): URL {
     return api_url
 }
 
-async function getMap(lat: string, lon: string): Promise<{ "svg_string": string }> {
+async function fetchMap(lat: string, lon: string): Promise<{ "svg_string": string }> {
 
     const area = {
         "latlon": [
@@ -45,7 +45,7 @@ export const load: PageServerLoad = async ({ fetch, params, url }) => {
 
 
     return {
-        "svg_string": getMap(p.get("lat"), p.get("lon")),
+        "svg_string": fetchMap(p.get("lat"), p.get("lon")), //implicitly awaited
         "display_name": p.get("display_name")
     }
 }
