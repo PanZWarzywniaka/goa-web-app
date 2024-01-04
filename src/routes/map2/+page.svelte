@@ -20,6 +20,11 @@
 	let bottom_area_height: number = DEFAULT_BOTTOM_AREA_HEIGHT
 	const MIN_BOTTOM_AREA_HEIGHT: number = 0
 	const MAX_BOTTOM_AREA_HEIGHT: number = 1500
+
+	let text_boxes = [
+		{ value: 'Kraków', x: 50, y: 94.5, font_size: 400, col: '#000000' },
+		{ value: 'Polska', x: 50, y: 97.5, font_size: 200, col: '#000000' }
+	]
 </script>
 
 <div class="row">
@@ -32,12 +37,11 @@
 	<div class="col-md">
 		<h2>Here is ur poster of {data.display_name}</h2>
 
-		<!-- <Map {...data.map_data} {land_col} {greenery_col} {water_col} {frame_col} /> -->
-		<Map {...data.map_data} {...colours} {frame_width} {bottom_area_height} />
+		<Map {...data.map_data} {...colours} {frame_width} {bottom_area_height} {text_boxes} />
 	</div>
 
 	<!-- desperately needs better styling -->
-	<div class="col-sm">
+	<div id="panel" class="col-sm">
 		<ColorPicker
 			bind:hex={colours.land_col}
 			label="Land cover"
@@ -87,8 +91,20 @@
 				Reset
 			</button>
 		</label>
+
+		{#each text_boxes as tb}
+			<label>
+				<input type="text" bind:value={tb.value} />
+				<input type="range" min="10" max="90" step="1" bind:value={tb.x} />
+				<input type="range" min="0" max="100" step="0.2" bind:value={tb.y} />
+				<input type="range" min="100" max="1000" step="5" bind:value={tb.font_size} />
+			</label>
+		{/each}
 	</div>
 </div>
 
 <style>
+	#panel > * {
+		padding: 30px;
+	}
 </style>

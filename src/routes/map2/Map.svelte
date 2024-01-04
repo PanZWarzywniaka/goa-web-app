@@ -15,6 +15,8 @@
 	export let frame_width: number
 	export let bottom_area_height: number
 
+	export let text_boxes: any
+
 	let svg_el: SVGElement
 
 	//print on change
@@ -59,5 +61,19 @@
 			id="bottom-area"
 			fill={frame_col}
 		/>
+
+		<!-- Text boxes -->
+		{#each text_boxes as tb}
+			<text
+				x="{tb.x}%"
+				y="{tb.y}%"
+				text-anchor="middle"
+				alignment-baseline="middle"
+				font-size={tb.font_size}
+				fill={tb.col}
+			>
+				{tb.value}
+			</text>
+		{/each}
 	</g>
 </svg>
