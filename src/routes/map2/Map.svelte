@@ -27,7 +27,7 @@
 </script>
 
 <svg bind:this={svg_el} viewBox="0 0 {WIDTH} {HEIGHT}">
-	<g id="map">
+	<g id="map" transform="translate(0 {-bottom_area_height})">
 		<rect x="0" y="0" width={WIDTH} height={HEIGHT} id="land" fill={land_col} />
 
 		{#await greenery then paths}

@@ -1,12 +1,32 @@
 
+import { getAPIEndpoint } from '$lib/server/util';
 import type { PageServerLoad } from './$types';
-import { env } from "$env/dynamic/private"
+
 import { greenery, water } from './data';
 
 
 async function fetchGreeneryData(): Promise<string> {
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    return greenery
+    // await new Promise(resolve => setTimeout(resolve, 3000));
+    //     const area = {
+    //     "latlon": [
+    //         lat,
+    //         lon
+    //     ]
+    // }
+
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: headers,
+        // body: JSON.stringify(area)
+    };
+
+    return fetch(`${getAPIEndpoint()}v2/greenery`, requestOptions).then(r => r.text())
+    // return greenery
 }
 
 
