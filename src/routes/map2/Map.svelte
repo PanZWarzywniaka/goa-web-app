@@ -13,6 +13,7 @@
 	export let frame_col: string
 
 	export let frame_width: number
+	export let bottom_area_height: number
 
 	let svg_el: SVGElement
 
@@ -49,6 +50,14 @@
 			stroke={frame_col}
 			stroke-width={frame_width}
 			fill="none"
+		/>
+		<rect
+			x="0"
+			y={HEIGHT - (bottom_area_height + frame_width)}
+			width={WIDTH}
+			height={bottom_area_height + frame_width}
+			id="bottom-area"
+			fill={frame_col}
 		/>
 	</g>
 </svg>

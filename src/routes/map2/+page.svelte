@@ -14,6 +14,10 @@
 	let frame_width: number = 300
 	const MIN_FRAME_WIDTH: number = 0
 	const MAX_FRAME_WIDTH: number = 1500
+
+	let bottom_area_height: number = 300
+	const MIN_BOTTOM_AREA_HEIGHT: number = 0
+	const MAX_BOTTOM_AREA_HEIGHT: number = 1500
 </script>
 
 <div class="row">
@@ -27,9 +31,10 @@
 		<h2>Here is ur poster of {data.display_name}</h2>
 
 		<!-- <Map {...data.map_data} {land_col} {greenery_col} {water_col} {frame_col} /> -->
-		<Map {...data.map_data} {...colours} {frame_width} />
+		<Map {...data.map_data} {...colours} {frame_width} {bottom_area_height} />
 	</div>
 
+	<!-- desperately needs better styling -->
 	<div class="col-sm">
 		<ColorPicker
 			bind:hex={colours.land_col}
@@ -50,6 +55,21 @@
 			Frame width
 			<input type="number" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
 			<input type="range" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
+		</label>
+		<label>
+			Bottom area height
+			<input
+				type="number"
+				bind:value={bottom_area_height}
+				min={MIN_BOTTOM_AREA_HEIGHT}
+				max={MAX_BOTTOM_AREA_HEIGHT}
+			/>
+			<input
+				type="range"
+				bind:value={bottom_area_height}
+				min={MIN_BOTTOM_AREA_HEIGHT}
+				max={MAX_BOTTOM_AREA_HEIGHT}
+			/>
 		</label>
 	</div>
 </div>
