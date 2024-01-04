@@ -11,11 +11,13 @@
 		frame_col: '#f3f3f3'
 	}
 
-	let frame_width: number = 300
+	const DEFAULT_FRAME_WIDTH: number = 300
+	let frame_width: number = DEFAULT_FRAME_WIDTH
 	const MIN_FRAME_WIDTH: number = 0
 	const MAX_FRAME_WIDTH: number = 1500
 
-	let bottom_area_height: number = 300
+	const DEFAULT_BOTTOM_AREA_HEIGHT: number = 300
+	let bottom_area_height: number = DEFAULT_BOTTOM_AREA_HEIGHT
 	const MIN_BOTTOM_AREA_HEIGHT: number = 0
 	const MAX_BOTTOM_AREA_HEIGHT: number = 1500
 </script>
@@ -55,6 +57,13 @@
 			Frame width
 			<input type="number" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
 			<input type="range" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
+			<button
+				on:click={() => {
+					frame_width = DEFAULT_FRAME_WIDTH
+				}}
+			>
+				Reset
+			</button>
 		</label>
 		<label>
 			Bottom area height
@@ -70,6 +79,13 @@
 				min={MIN_BOTTOM_AREA_HEIGHT}
 				max={MAX_BOTTOM_AREA_HEIGHT}
 			/>
+			<button
+				on:click={() => {
+					bottom_area_height = DEFAULT_BOTTOM_AREA_HEIGHT
+				}}
+			>
+				Reset
+			</button>
 		</label>
 	</div>
 </div>
