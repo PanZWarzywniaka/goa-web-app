@@ -5,15 +5,14 @@ import type { PageServerLoad } from './$types';
 import { greenery, water } from './data';
 
 
-async function fetchGreeneryData(): Promise<string> {
-    // await new Promise(resolve => setTimeout(resolve, 3000));
+function getRequestOptions() {
+
     //     const area = {
     //     "latlon": [
     //         lat,
     //         lon
     //     ]
     // }
-
     const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -25,8 +24,16 @@ async function fetchGreeneryData(): Promise<string> {
         // body: JSON.stringify(area)
     };
 
-    return fetch(`${getAPIEndpoint()}v2/greenery`, requestOptions).then(r => r.text())
-    // return greenery
+    return requestOptions
+}
+
+
+async function fetchGreeneryData(): Promise<string> {
+    return fetch(`${getAPIEndpoint()}v2/greenery`, getRequestOptions()).then(r => r.text())
+}
+
+async function fetchWaterData(): Promise<string> {
+    return fetch(`${getAPIEndpoint()}v2/water`, getRequestOptions()).then(r => r.text())
 }
 
 
@@ -41,7 +48,7 @@ export const load: PageServerLoad = async ({ fetch, params, url }) => {
     return {
         "map_data": {
             greenery: fetchGreeneryData(),
-            water
+            water: fetchWaterData()
         },
         "display_name": "Hard coded Kraków"//p.get("display_name")
     }
