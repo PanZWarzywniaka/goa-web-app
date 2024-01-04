@@ -7,12 +7,6 @@ import { greenery, water } from './data';
 
 function getRequestOptions() {
 
-    //     const area = {
-    //     "latlon": [
-    //         lat,
-    //         lon
-    //     ]
-    // }
     const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -27,13 +21,16 @@ function getRequestOptions() {
     return requestOptions
 }
 
+async function fetchLayer(layer_name: string) {
+    console.log(`Fetching: ${layer_name}`)
+    let ro = getRequestOptions()
+    ro.body = JSON.stringify({
+        layer_name: layer_name,
+        // area
 
-async function fetchGreeneryData(): Promise<string> {
-    return fetch(`${getAPIEndpoint()}v2/greenery`, getRequestOptions()).then(r => r.text())
-}
-
-async function fetchWaterData(): Promise<string> {
-    return fetch(`${getAPIEndpoint()}v2/water`, getRequestOptions()).then(r => r.text())
+    })
+    console.log(ro)
+    return fetch(`${getAPIEndpoint()}v3/paths`, ro).then(r => r.text())
 }
 
 
@@ -44,11 +41,11 @@ export const load: PageServerLoad = async ({ fetch, params, url }) => {
     const p = url.searchParams
 
 
-
     return {
         "map_data": {
-            greenery: fetchGreeneryData(),
-            water: fetchWaterData()
+            greenery: fetchLayer("greenery"),
+            water: fetchLayer("water"),
+            pier: fetchLayer("pier")
         },
         "display_name": "Hard coded Kraków"//p.get("display_name")
     }
