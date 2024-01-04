@@ -15,19 +15,29 @@
 	export let frame_width: number
 
 	let svg_el: SVGElement
-	$: console.log(svg_el)
+
+	//print on change
+	$: {
+		console.log('SVG EL:')
+		console.log(svg_el)
+	}
 </script>
 
 <svg bind:this={svg_el} viewBox="0 0 {WIDTH} {HEIGHT}">
 	<g id="map">
 		<rect x="0" y="0" width={WIDTH} height={HEIGHT} id="land" fill={land_col} />
 
-		<g id="green" fill={greenery_col}>
-			{@html greenery}
-		</g>
-		<g id="water" fill={water_col}>
-			{@html water}
-		</g>
+		{#await greenery then paths}
+			<g id="green" fill={greenery_col}>
+				{@html paths}
+			</g>
+		{/await}
+
+		{#await water then paths}
+			<g id="water" fill={water_col}>
+				{@html paths}
+			</g>
+		{/await}
 	</g>
 	<g id="frame">
 		<rect

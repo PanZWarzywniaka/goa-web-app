@@ -8,10 +8,12 @@
 		land_col: '#338585',
 		greenery_col: '#266464',
 		water_col: '#f3f3f3',
-		frame_col: '#f12267'
+		frame_col: '#f3f3f3'
 	}
 
-	let frame_width: number = 100
+	let frame_width: number = 300
+	const MIN_FRAME_WIDTH: number = 0
+	const MAX_FRAME_WIDTH: number = 1500
 </script>
 
 <div class="row">
@@ -46,8 +48,8 @@
 
 		<label>
 			Frame width
-			<input type="number" bind:value={frame_width} min="0" max="1000" />
-			<input type="range" bind:value={frame_width} min="0" max="1000" />
+			<input type="number" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
+			<input type="range" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
 		</label>
 	</div>
 </div>
