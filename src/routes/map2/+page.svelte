@@ -22,14 +22,28 @@
 	const MAX_BOTTOM_AREA_HEIGHT: number = 1500
 
 	let text_boxes = [
-		{ value: 'Kraków', x: 50, y: 94.5, font_size: 400, col: '#000000' },
-		{ value: 'Polska', x: 50, y: 97.5, font_size: 200, col: '#000000' }
+		{ value: 'Kraków', x: 50, y: 94.5, font_size: 400, font_family: 'Arial', col: '#000000' },
+		{ value: 'Polska', x: 50, y: 97.5, font_size: 200, font_family: 'Arial', col: '#000000' }
 	]
 
 	let svg_el: SVGElement
-	//print on change
-	$: {
+
+	function downloadSVG() {
 		console.log(svg_el)
+		const svgString = new XMLSerializer().serializeToString(svg_el)
+		console.log(svgString)
+		const blob = new Blob([svgString], { type: 'image/svg+xml' })
+		console.log(blob)
+
+		// Create a download link
+		const downloadLink = document.createElement('a')
+		downloadLink.href = URL.createObjectURL(blob)
+		downloadLink.download = 'your_filename.svg'
+
+		// Trigger a click on the link to start the download
+		document.body.appendChild(downloadLink)
+		downloadLink.click()
+		document.body.removeChild(downloadLink)
 	}
 </script>
 
@@ -55,6 +69,7 @@
 
 	<!-- desperately needs better styling -->
 	<div id="panel" class="col-sm">
+		<!--TODO make it a separate component -->
 		<ColorPicker
 			bind:hex={colours.land_col}
 			label="Land cover"
@@ -69,7 +84,7 @@
 			canChangeMode={false}
 		/>
 		<ColorPicker bind:hex={colours.frame_col} label="Frame" isAlpha={false} canChangeMode={false} />
-
+		<!--TODO Make it a seprarate shared component, for frame width and bottom area height just variables -->
 		<label>
 			Frame width
 			<input type="number" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
@@ -104,7 +119,7 @@
 				Reset
 			</button>
 		</label>
-
+		<!--TODO Make it a separable component -->
 		{#each text_boxes as tb}
 			<label>
 				<input type="text" bind:value={tb.value} />
@@ -113,6 +128,11 @@
 				<input type="range" min="100" max="1000" step="5" bind:value={tb.font_size} />
 			</label>
 		{/each}
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<button on:click={downloadSVG}>Download SVG!</button>
 	</div>
 </div>
 

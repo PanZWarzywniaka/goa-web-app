@@ -70,6 +70,7 @@
 				text-anchor="middle"
 				alignment-baseline="middle"
 				font-size={tb.font_size}
+				font-family={tb.font_family}
 				fill={tb.col}
 			>
 				{tb.value}
