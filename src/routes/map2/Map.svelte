@@ -5,6 +5,7 @@
 	//data
 	export let greenery: string
 	export let water: string
+	export let pier: string
 
 	//colours
 	export let land_col: string
@@ -30,6 +31,11 @@
 	<g id="map" transform="translate(0 {-bottom_area_height})">
 		<rect x="0" y="0" width={WIDTH} height={HEIGHT} id="land" fill={land_col} />
 
+		{#await pier then paths}
+			<g id="pier" fill={land_col}>
+				{@html paths}
+			</g>
+		{/await}
 		{#await greenery then paths}
 			<g id="green" fill={greenery_col}>
 				{@html paths}
