@@ -29,7 +29,7 @@ async function fetchLayer(layer_name: string) {
         // area
 
     })
-    console.log(ro)
+    console.debug(ro)
     return fetch(`${getAPIEndpoint()}v3/paths`, ro).then(r => r.text())
 }
 

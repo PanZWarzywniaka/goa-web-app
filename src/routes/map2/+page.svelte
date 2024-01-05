@@ -1,9 +1,12 @@
 <script lang="ts">
 	import Map from './Map.svelte'
 	import ColorPicker from 'svelte-awesome-color-picker'
+	import { Canvg, presets } from 'canvg'
 
 	export let data
 
+	const WIDTH = 4960
+	const HEIGHT = 7016
 	let colours = {
 		land_col: '#338585',
 		greenery_col: '#266464',
@@ -28,22 +31,34 @@
 
 	let svg_el: SVGElement
 
-	function downloadSVG() {
-		console.log(svg_el)
-		const svgString = new XMLSerializer().serializeToString(svg_el)
-		console.log(svgString)
-		const blob = new Blob([svgString], { type: 'image/svg+xml' })
-		console.log(blob)
-
+	function downloadFromBlob(b: Blob, file_name: string) {
 		// Create a download link
 		const downloadLink = document.createElement('a')
-		downloadLink.href = URL.createObjectURL(blob)
-		downloadLink.download = 'your_filename.svg'
+		downloadLink.href = URL.createObjectURL(b)
+		downloadLink.download = file_name
 
 		// Trigger a click on the link to start the download
 		document.body.appendChild(downloadLink)
 		downloadLink.click()
 		document.body.removeChild(downloadLink)
+	}
+
+	function downloadSVG() {
+		const svgString = new XMLSerializer().serializeToString(svg_el)
+		const blob = new Blob([svgString], { type: 'image/svg+xml' })
+		downloadFromBlob(blob, 'your_map.svg')
+	}
+
+	async function downloadPNG() {
+		const preset = presets.offscreen()
+		const svg_str: string = new XMLSerializer().serializeToString(svg_el)
+
+		const canvas = new OffscreenCanvas(WIDTH, HEIGHT)
+		const ctx = canvas.getContext('2d')
+		const v = await Canvg.from(ctx, svg_str, preset)
+		await v.render()
+		const blob = await canvas.convertToBlob()
+		downloadFromBlob(blob, 'your_map.png')
 	}
 </script>
 
@@ -58,6 +73,8 @@
 		<h2>Here is ur poster of {data.display_name}</h2>
 
 		<Map
+			{WIDTH}
+			{HEIGHT}
 			{...data.map_data}
 			{...colours}
 			{frame_width}
@@ -132,7 +149,8 @@
 </div>
 <div class="row">
 	<div class="col">
-		<button on:click={downloadSVG}>Download SVG!</button>
+		<button on:click={downloadSVG}>Download SVG</button>
+		<button on:click={downloadPNG}>Download PNG</button>
 	</div>
 </div>
 

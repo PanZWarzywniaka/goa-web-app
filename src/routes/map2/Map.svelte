@@ -1,6 +1,6 @@
 <script lang="ts">
-	const WIDTH = 4960
-	const HEIGHT = 7016
+	export let WIDTH: number
+	export let HEIGHT: number
 
 	//data
 	export let greenery: string
