@@ -18,13 +18,7 @@
 
 	export let text_boxes: any
 
-	let svg_el: SVGElement
-
-	//print on change
-	$: {
-		console.log('SVG EL:')
-		console.log(svg_el)
-	}
+	export let svg_el: SVGElement
 </script>
 
 <svg bind:this={svg_el} viewBox="0 0 {WIDTH} {HEIGHT}">

@@ -25,6 +25,12 @@
 		{ value: 'Kraków', x: 50, y: 94.5, font_size: 400, col: '#000000' },
 		{ value: 'Polska', x: 50, y: 97.5, font_size: 200, col: '#000000' }
 	]
+
+	let svg_el: SVGElement
+	//print on change
+	$: {
+		console.log(svg_el)
+	}
 </script>
 
 <div class="row">
@@ -37,7 +43,14 @@
 	<div class="col-md">
 		<h2>Here is ur poster of {data.display_name}</h2>
 
-		<Map {...data.map_data} {...colours} {frame_width} {bottom_area_height} {text_boxes} />
+		<Map
+			{...data.map_data}
+			{...colours}
+			{frame_width}
+			{bottom_area_height}
+			{text_boxes}
+			bind:svg_el
+		/>
 	</div>
 
 	<!-- desperately needs better styling -->
