@@ -2,9 +2,6 @@
 import { getAPIEndpoint } from '$lib/server/util';
 import type { PageServerLoad } from './$types';
 
-import { greenery, water } from './data';
-
-
 function getRequestOptions() {
 
     const headers = {
