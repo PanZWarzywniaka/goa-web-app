@@ -3,9 +3,9 @@
 	export let HEIGHT: number
 
 	//data
-	export let greenery: string
-	export let water: string
-	export let pier: string
+	export let greenery: Promise<string>
+	export let water: Promise<string>
+	export let pier: Promise<string>
 
 	//colours
 	export let land_col: string

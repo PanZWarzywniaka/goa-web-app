@@ -54,7 +54,7 @@
 		const svg_str: string = new XMLSerializer().serializeToString(svg_el)
 
 		const canvas = new OffscreenCanvas(WIDTH, HEIGHT)
-		const ctx = canvas.getContext('2d')
+		const ctx = canvas.getContext('2d') as OffscreenCanvasRenderingContext2D
 		const v = await Canvg.from(ctx, svg_str, preset)
 		await v.render()
 		const blob = await canvas.convertToBlob()
