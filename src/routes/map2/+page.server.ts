@@ -1,33 +1,18 @@
 
-import { getAPIEndpoint } from '$lib/server/util';
+import { getAPIEndpoint, getRequestOptions } from '$lib/server/util';
 import type { PageServerLoad } from './$types';
 
-function getRequestOptions() {
 
-    const headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    };
-
-    const requestOptions = {
-        method: 'POST',
-        headers: headers,
-        // body: JSON.stringify(area)
-    };
-
-    return requestOptions
-}
-
-async function fetchLayer(layer_name: string) {
+async function fetchLayer(layer_name: string): Promise<string> {
     console.log(`Fetching: ${layer_name}`)
-    let ro = getRequestOptions()
-    ro.body = JSON.stringify({
+
+    const body = JSON.stringify({
         layer_name: layer_name,
         // area
 
     })
-    console.debug(ro)
-    return fetch(`${getAPIEndpoint()}v3/paths`, ro).then(r => r.text())
+
+    return fetch(`${getAPIEndpoint()}v3/paths`, getRequestOptions(body)).then(r => r.text())
 }
 
 
