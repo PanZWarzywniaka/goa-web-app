@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { LayerData } from './map_layers'
+
 	export let WIDTH: number
 	export let HEIGHT: number
 
@@ -6,6 +8,7 @@
 	export let greenery: Promise<string>
 	export let water: Promise<string>
 	export let pier: Promise<string>
+	export let street_data: LayerData[]
 
 	//colours
 	export let land_col: string
@@ -19,6 +22,8 @@
 	export let text_boxes: any
 
 	export let svg_el: SVGElement
+
+	console.log(street_data)
 </script>
 
 <svg bind:this={svg_el} viewBox="0 0 {WIDTH} {HEIGHT}">
@@ -42,6 +47,14 @@
 				{@html paths}
 			</g>
 		{/await}
+
+		{#each street_data as { name, relative_width, paths }}
+			{#await paths then p}
+				<g id="{name}," stroke="black" fill="none" stroke-width={relative_width}>
+					{@html p}
+				</g>
+			{/await}
+		{/each}
 	</g>
 	<g id="frame">
 		<rect
