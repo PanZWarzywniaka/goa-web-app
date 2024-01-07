@@ -39,14 +39,21 @@ export const load: PageServerLoad = async ({ fetch, params, url }) => {
         ]
     }
 
+    const display_name: string = p.get("display_name") as string
+    const splited: string[] = display_name.split(',');
+    const main_label: string = splited[0].trim()
+    const sub_label: string = splited[splited.length - 1].trim()
+
     return {
         "map_data": {
-            greenery: fetchLayer("greenery", a),
             water: fetchLayer("water", a),
+            greenery: fetchLayer("greenery", a),
             pier: fetchLayer("pier", a),
             street_data: fetchLayerPaths(a)
 
         },
-        "display_name": p.get("display_name")
+        display_name,
+        main_label,
+        sub_label
     }
 }

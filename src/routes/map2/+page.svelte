@@ -25,8 +25,15 @@
 	const MAX_BOTTOM_AREA_HEIGHT: number = 1500
 
 	let text_boxes = [
-		{ value: 'Kraków', x: 50, y: 94.5, font_size: 400, font_family: 'Arial', col: '#000000' },
-		{ value: 'Polska', x: 50, y: 97.5, font_size: 200, font_family: 'Arial', col: '#000000' }
+		{
+			value: data.main_label,
+			x: 50,
+			y: 94.5,
+			font_size: 400,
+			font_family: 'Arial',
+			col: '#000000'
+		},
+		{ value: data.sub_label, x: 50, y: 97.5, font_size: 200, font_family: 'Arial', col: '#000000' }
 	]
 
 	let svg_el: SVGElement
