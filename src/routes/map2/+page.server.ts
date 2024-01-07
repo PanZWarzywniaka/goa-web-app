@@ -1,14 +1,14 @@
 
 import { getAPIEndpoint, getRequestOptions } from '$lib/server/util';
 import type { PageServerLoad } from './$types';
-import { layers, type LayerData } from './map_layers';
+import { layers, type LayerData, type Area } from './map_layers';
 
-async function fetchLayer(layer_name: string): Promise<string> {
+async function fetchLayer(layer_name: string, area: Area): Promise<string> {
     console.log(`Fetching: ${layer_name}`)
 
     const body = JSON.stringify({
         layer_name: layer_name,
-        // area
+        area: area
 
     })
 
@@ -16,11 +16,11 @@ async function fetchLayer(layer_name: string): Promise<string> {
 }
 
 
-function fetchLayerPaths(): LayerData[] {
+function fetchLayerPaths(area: Area): LayerData[] {
     const ret: LayerData[] = layers.map((layer: LayerData) => {
         return {
             ...layer, //spread existing properites
-            paths: fetchLayer(layer.name)
+            paths: fetchLayer(layer.name, area)
         }
     })
 
@@ -32,15 +32,21 @@ export const load: PageServerLoad = async ({ fetch, params, url }) => {
     console.log(`Search params are ${url.searchParams}`)
 
     const p = url.searchParams
-    let test = [{ "motorway": "somestring" }, { "footway": "somestring" }]
+    const a: Area = {
+        latlon: [
+            p.get("lat"),
+            p.get("lon")
+        ]
+    }
+
     return {
         "map_data": {
-            greenery: fetchLayer("greenery"),
-            water: fetchLayer("water"),
-            pier: fetchLayer("pier"),
-            street_data: fetchLayerPaths()
+            greenery: fetchLayer("greenery", a),
+            water: fetchLayer("water", a),
+            pier: fetchLayer("pier", a),
+            street_data: fetchLayerPaths(a)
 
         },
-        "display_name": "Hard coded Kraków"//p.get("display_name")
+        "display_name": p.get("display_name")
     }
 }

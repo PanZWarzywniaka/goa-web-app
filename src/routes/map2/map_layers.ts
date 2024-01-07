@@ -1,3 +1,10 @@
+export interface Area {
+    bbox?: number[]
+    latlon?: number[]
+    name?: string
+    radius?: number
+}
+
 export interface LayerData {
     "name": string
     "relative_width"?: number
