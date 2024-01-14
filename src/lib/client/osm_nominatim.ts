@@ -20,7 +20,7 @@ export const getLocations = async (query: string): Promise<OSMNominatimPlace[]> 
         // get rid of administrative locations
         .filter((el) => el.addresstype != 'administrative')
         .map((el) => {
-            el.url = `/map?lat=${el.lat}&lon=${el.lon}&display_name=${el.display_name}`
+            el.url = `/map2?lat=${el.lat}&lon=${el.lon}&display_name=${el.display_name}`
             return el
         })
 

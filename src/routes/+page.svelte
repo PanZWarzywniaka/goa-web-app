@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Circle } from 'svelte-loading-spinners'
-	import { debounce } from '$lib/index'
-	import { getLocations, type OSMNominatimPlace } from '$lib/osm_nominatim'
+	import { debounce } from '$lib/client/index'
+	import { getLocations, type OSMNominatimPlace } from '$lib/client/osm_nominatim'
 
 	let foundSuggestions: OSMNominatimPlace[] = []
 	let map_loading: boolean = false
