@@ -15,6 +15,7 @@
 	export let greenery_col: string
 	export let water_col: string
 	export let frame_col: string
+	export let street_col: string
 
 	export let frame_width: number
 	export let bottom_area_height: number
@@ -50,7 +51,7 @@
 
 		{#each street_data as { name, relative_width, paths }}
 			{#await paths then p}
-				<g id="{name}," stroke="black" fill="none" stroke-width={relative_width}>
+				<g id="{name}," stroke={street_col} fill="none" stroke-width={relative_width}>
 					{@html p}
 				</g>
 			{/await}
