@@ -11,7 +11,8 @@
 		land_col: '#338585',
 		greenery_col: '#266464',
 		water_col: '#f3f3f3',
-		frame_col: '#f3f3f3'
+		frame_col: '#f3f3f3',
+		street_col: '#f3f3f3'
 	}
 
 	const DEFAULT_FRAME_WIDTH: number = 300
@@ -105,6 +106,12 @@
 		<ColorPicker
 			bind:hex={colours.greenery_col}
 			label="Greenery"
+			isAlpha={false}
+			canChangeMode={false}
+		/>
+		<ColorPicker
+			bind:hex={colours.street_col}
+			label="Streets"
 			isAlpha={false}
 			canChangeMode={false}
 		/>
