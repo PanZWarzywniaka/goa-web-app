@@ -168,6 +168,7 @@
 		<button on:click={downloadPNG}>Download PNG</button>
 	</div>
 </div>
+<footer>© Copyright and attribution information and OpenStreetMap Contributors</footer>
 
 <style>
 	#panel > * {
