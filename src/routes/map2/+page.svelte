@@ -31,10 +31,19 @@
 			x: 50,
 			y: 94.5,
 			font_size: 400,
-			font_family: 'Arial',
+			font_family: 'Montserrat',
+			font_weight: 400,
 			col: '#000000'
 		},
-		{ value: data.sub_label, x: 50, y: 97.5, font_size: 200, font_family: 'Arial', col: '#000000' }
+		{
+			value: data.sub_label,
+			x: 50,
+			y: 97.5,
+			font_size: 200,
+			font_family: 'Montserrat',
+			font_weight: 400,
+			col: '#000000'
+		}
 	]
 
 	let svg_el: SVGElement

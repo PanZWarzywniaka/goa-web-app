@@ -86,6 +86,7 @@
 				alignment-baseline="middle"
 				font-size={tb.font_size}
 				font-family={tb.font_family}
+				font-weight={tb.font_weight}
 				fill={tb.col}
 			>
 				{tb.value}
