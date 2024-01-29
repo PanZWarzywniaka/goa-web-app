@@ -27,5 +27,6 @@ export const layers: LayerData[] = [
     { 'name': 'living_street', 'relative_width': 3 },
     { 'name': 'service', 'relative_width': 2 },
     { 'name': 'unclassified', 'relative_width': 2 },
-    { 'name': 'pedestrian', 'relative_width': 2 },
-    { 'name': 'footway', 'relative_width': 1 }]
+    { 'name': 'pedestrian', 'relative_width': 2 }
+    // { 'name': 'footway', 'relative_width': 1 }
+]
