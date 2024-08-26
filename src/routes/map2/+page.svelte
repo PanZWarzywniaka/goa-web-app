@@ -50,6 +50,7 @@
 	]
 
 	let svg_el: SVGElement
+	let downloading: boolean = false
 
 	function downloadFromBlob(b: Blob, file_name: string) {
 		// Create a download link
@@ -70,6 +71,7 @@
 	}
 
 	async function downloadPNG() {
+		downloading = true
 		const svg_str: string = new XMLSerializer().serializeToString(svg_el)
 
 		const canvas = new OffscreenCanvas(WIDTH, HEIGHT)
@@ -80,6 +82,7 @@
 		await v.render()
 		const blob = await canvas.convertToBlob()
 		downloadFromBlob(blob, 'your_map.png')
+		downloading = false
 	}
 </script>
 
@@ -218,10 +221,13 @@
 		</details>
 		<div>
 			<!-- <p>Export</p> -->
-			<div class="grid">
+			<section class="grid">
 				<button on:click={downloadSVG}>Download SVG</button>
 				<button on:click={downloadPNG}>Download PNG</button>
-			</div>
+			</section>
+			{#if downloading}
+				<progress />
+			{/if}
 		</div>
 	</article>
 </div>
