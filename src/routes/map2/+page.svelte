@@ -103,7 +103,7 @@
 
 	<!-- desperately needs better styling -->
 	<article>
-		<details open>
+		<details>
 			<summary role="button">Change colors</summary>
 			<!--TODO make it a separate component -->
 			<section class="grid">
@@ -189,7 +189,7 @@
 				</button>
 			</label>
 		</details>
-		<details open>
+		<details>
 			<summary role="button">Change caption</summary>
 			<!--TODO Make it a separable component -->
 			{#each text_boxes as tb}
