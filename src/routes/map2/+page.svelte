@@ -80,7 +80,7 @@
 		const preset = presets.offscreen()
 		const v = await Canvg.from(ctx, svg_str, preset)
 		await v.render()
-		const blob = await canvas.convertToBlob()
+		const blob = await canvas.convertToBlob({ type: 'image/png' })
 		downloadFromBlob(blob, 'your_map.png')
 		downloading = false
 	}
@@ -222,8 +222,12 @@
 		<div>
 			<!-- <p>Export</p> -->
 			<section class="grid">
-				<button on:click={downloadSVG}>Download SVG</button>
-				<button on:click={downloadPNG}>Download PNG</button>
+				<button on:click={downloadPNG} data-tooltip="Smaller file size but worse quality"
+					>Download PNG</button
+				>
+				<button on:click={downloadSVG} data-tooltip="Bigger file size but best map quality"
+					>Download SVG</button
+				>
 			</section>
 			{#if downloading}
 				<progress />
