@@ -97,39 +97,57 @@
 
 	<!-- desperately needs better styling -->
 	<div>
-		<details>
+		<details open>
 			<summary>Change colors</summary>
 			<!--TODO make it a separate component -->
-			<ColorPicker
-				bind:hex={colours.land_col}
-				label="Land cover"
-				isAlpha={false}
-				canChangeMode={false}
-			/>
-			<ColorPicker
-				bind:hex={colours.water_col}
-				label="Water"
-				isAlpha={false}
-				canChangeMode={false}
-			/>
-			<ColorPicker
-				bind:hex={colours.greenery_col}
-				label="Greenery"
-				isAlpha={false}
-				canChangeMode={false}
-			/>
-			<ColorPicker
-				bind:hex={colours.street_col}
-				label="Streets"
-				isAlpha={false}
-				canChangeMode={false}
-			/>
-			<ColorPicker
-				bind:hex={colours.frame_col}
-				label="Frame"
-				isAlpha={false}
-				canChangeMode={false}
-			/>
+			<section class="grid">
+				<article>
+					<ColorPicker
+						bind:hex={colours.land_col}
+						label="Background"
+						isAlpha={false}
+						canChangeMode={false}
+					/>
+				</article>
+				<article>
+					<ColorPicker
+						bind:hex={colours.water_col}
+						label="Water"
+						isAlpha={false}
+						canChangeMode={false}
+					/>
+				</article>
+				<article>
+					<ColorPicker
+						bind:hex={colours.greenery_col}
+						label="Greenery"
+						isAlpha={false}
+						canChangeMode={false}
+					/>
+				</article>
+			</section>
+			<section class="grid">
+				<article>
+					<ColorPicker
+						bind:hex={colours.street_col}
+						label="Streets"
+						isAlpha={false}
+						canChangeMode={false}
+					/>
+				</article>
+
+				<article>
+					<ColorPicker
+						bind:hex={colours.frame_col}
+						label="Frame"
+						isAlpha={false}
+						canChangeMode={false}
+					/>
+				</article>
+
+				<article />
+			</section>
+
 			<!--TODO Make it a seprarate shared component, for frame width and bottom area height just variables -->
 		</details>
 		<details>
@@ -170,7 +188,7 @@
 			</label>
 		</details>
 		<details>
-			<summary>Change text</summary>
+			<summary>Change caption</summary>
 			<!--TODO Make it a separable component -->
 			{#each text_boxes as tb}
 				<label>
