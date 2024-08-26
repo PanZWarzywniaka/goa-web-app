@@ -190,26 +190,30 @@
 			<summary role="button">Change caption</summary>
 			<!--TODO Make it a separable component -->
 			{#each text_boxes as tb}
-				<label>
-					{#if tb.main}
-						<p>Main caption:</p>
-					{:else}
-						<p>Sub caption:</p>
-					{/if}
-					<input type="text" bind:value={tb.value} />
-				</label>
-				<label class="grid">
-					<p>Size</p>
-					<input type="range" min="100" max="1000" step="5" bind:value={tb.font_size} />
-				</label>
-				<label class="grid">
-					<p>Horizontal position</p>
-					<input type="range" min="10" max="90" step="1" bind:value={tb.x} />
-				</label>
-				<label class="grid">
-					<p>Vertical position</p>
-					<input type="range" min="0" max="100" step="0.2" bind:value={tb.y} />
-				</label>
+				<article>
+					<label>
+						<header>
+							{#if tb.main}
+								Main caption:
+							{:else}
+								Sub caption:
+							{/if}
+						</header>
+						<input type="text" bind:value={tb.value} />
+					</label>
+					<label class="grid">
+						<p>Size</p>
+						<input type="range" min="100" max="1000" step="5" bind:value={tb.font_size} />
+					</label>
+					<label class="grid">
+						<p>Horizontal position</p>
+						<input type="range" min="10" max="90" step="1" bind:value={tb.x} />
+					</label>
+					<label class="grid">
+						<p>Vertical position</p>
+						<input type="range" min="0" max="100" step="0.2" bind:value={tb.y} />
+					</label>
+				</article>
 			{/each}
 		</details>
 		<div>
