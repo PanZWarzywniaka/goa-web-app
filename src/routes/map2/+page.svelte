@@ -2,6 +2,7 @@
 	import Map from './Map.svelte'
 	import ColorPicker from 'svelte-awesome-color-picker'
 	import { Canvg, presets } from 'canvg'
+	import { RotateCcw } from 'lucide-svelte'
 
 	export let data
 
@@ -145,33 +146,33 @@
 					/>
 				</article>
 
-				<article />
+				<!-- <article /> -->
 			</section>
 
 			<!--TODO Make it a seprarate shared component, for frame width and bottom area height just variables -->
 		</details>
 		<details>
 			<summary>Change frame</summary>
-			<label>
-				Frame width
-				<input type="number" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
+			<label class="grid">
+				Frame width:
+				<!-- <input type="number" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} /> -->
 				<input type="range" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
 				<button
 					on:click={() => {
 						frame_width = DEFAULT_FRAME_WIDTH
 					}}
 				>
-					Reset
+					<RotateCcw />
 				</button>
 			</label>
-			<label>
-				Bottom area height
-				<input
+			<label class="grid">
+				Bottom area height:
+				<!-- <input
 					type="number"
 					bind:value={bottom_area_height}
 					min={MIN_BOTTOM_AREA_HEIGHT}
 					max={MAX_BOTTOM_AREA_HEIGHT}
-				/>
+				/> -->
 				<input
 					type="range"
 					bind:value={bottom_area_height}
@@ -183,7 +184,7 @@
 						bottom_area_height = DEFAULT_BOTTOM_AREA_HEIGHT
 					}}
 				>
-					Reset
+					<RotateCcw />
 				</button>
 			</label>
 		</details>
