@@ -28,6 +28,7 @@
 
 	let text_boxes = [
 		{
+			main: true,
 			value: data.main_label,
 			x: 50,
 			y: 94.5,
@@ -37,6 +38,7 @@
 			col: '#000000'
 		},
 		{
+			main: false,
 			value: data.sub_label,
 			x: 50,
 			y: 97.5,
@@ -97,9 +99,9 @@
 	</div>
 
 	<!-- desperately needs better styling -->
-	<div>
+	<article>
 		<details open>
-			<summary>Change colors</summary>
+			<summary role="button">Change colors</summary>
 			<!--TODO make it a separate component -->
 			<section class="grid">
 				<article>
@@ -151,13 +153,14 @@
 
 			<!--TODO Make it a seprarate shared component, for frame width and bottom area height just variables -->
 		</details>
+
 		<details>
-			<summary>Change frame</summary>
+			<summary role="button">Change frame</summary>
 			<label class="grid">
-				Frame width:
-				<!-- <input type="number" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} /> -->
+				<p>Frame width:</p>
 				<input type="range" bind:value={frame_width} min={MIN_FRAME_WIDTH} max={MAX_FRAME_WIDTH} />
 				<button
+					class="outline"
 					on:click={() => {
 						frame_width = DEFAULT_FRAME_WIDTH
 					}}
@@ -166,13 +169,7 @@
 				</button>
 			</label>
 			<label class="grid">
-				Bottom area height:
-				<!-- <input
-					type="number"
-					bind:value={bottom_area_height}
-					min={MIN_BOTTOM_AREA_HEIGHT}
-					max={MAX_BOTTOM_AREA_HEIGHT}
-				/> -->
+				<p>Bottom area height:</p>
 				<input
 					type="range"
 					bind:value={bottom_area_height}
@@ -180,6 +177,7 @@
 					max={MAX_BOTTOM_AREA_HEIGHT}
 				/>
 				<button
+					class="outline"
 					on:click={() => {
 						bottom_area_height = DEFAULT_BOTTOM_AREA_HEIGHT
 					}}
@@ -188,26 +186,40 @@
 				</button>
 			</label>
 		</details>
-		<details>
-			<summary>Change caption</summary>
+		<details open>
+			<summary role="button">Change caption</summary>
 			<!--TODO Make it a separable component -->
 			{#each text_boxes as tb}
 				<label>
+					{#if tb.main}
+						<p>Main caption:</p>
+					{:else}
+						<p>Sub caption:</p>
+					{/if}
 					<input type="text" bind:value={tb.value} />
-					<input type="range" min="10" max="90" step="1" bind:value={tb.x} />
-					<input type="range" min="0" max="100" step="0.2" bind:value={tb.y} />
+				</label>
+				<label class="grid">
+					<p>Size</p>
 					<input type="range" min="100" max="1000" step="5" bind:value={tb.font_size} />
+				</label>
+				<label class="grid">
+					<p>Horizontal position</p>
+					<input type="range" min="10" max="90" step="1" bind:value={tb.x} />
+				</label>
+				<label class="grid">
+					<p>Vertical position</p>
+					<input type="range" min="0" max="100" step="0.2" bind:value={tb.y} />
 				</label>
 			{/each}
 		</details>
-		<article>
+		<div>
 			<!-- <p>Export</p> -->
 			<div class="grid">
 				<button on:click={downloadSVG}>Download SVG</button>
 				<button on:click={downloadPNG}>Download PNG</button>
 			</div>
-		</article>
-	</div>
+		</div>
+	</article>
 </div>
 
 <footer>© Copyright and attribution information and OpenStreetMap Contributors</footer>
