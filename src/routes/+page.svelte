@@ -17,8 +17,9 @@
 	$: console.log(foundSuggestions)
 </script>
 
-<div>
-	<p>Start by typing a place below</p>
+<article>
+	<p>Generate map poster of any city 🏙️</p>
+	<p>Start by typing a place below:</p>
 	<form>
 		<input
 			name="search"
@@ -50,4 +51,5 @@
 			</ul>
 		{/if}
 	</form>
-</div>
+	<p>See examples below:</p>
+</article>
