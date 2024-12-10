@@ -11,9 +11,17 @@
 	<slot />
 </main>
 
-<footer class="container">Contact: aleksanderosikowicz@gmail.com</footer>
+<footer class="container">
+	Special mapping request? 🗺️ Email me at: <span class="highlight"
+		>aleksanderosikowicz@gmail.com</span
+	>
+</footer>
 
 <style>
+	.highlight {
+		font-weight: bold;
+		color: #007bff; /* Adjust the color as needed */
+	}
 	main {
 		min-height: 80vh;
 		display: flex;
