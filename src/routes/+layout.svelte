@@ -10,9 +10,17 @@
 <main class="container">
 	<slot />
 </main>
-<footer>
-	<!-- Add link to my page here -->
-</footer>
+
+<footer class="container">Contact: aleksanderosikowicz@gmail.com</footer>
 
 <style>
+	main {
+		min-height: 80vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	footer {
+		margin-top: auto;
+	}
 </style>

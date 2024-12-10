@@ -51,5 +51,4 @@
 			</ul>
 		{/if}
 	</form>
-	<p>See examples below:</p>
 </article>
